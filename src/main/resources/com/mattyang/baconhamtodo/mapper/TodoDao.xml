@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mattyang.baconhamtodo.dao.TodoDao">
+
+    <insert id="insertAndGetTid" parameterType="todo">
+        <selectKey resultType="integer" order="AFTER" keyProperty="tid">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into todo(title,uid,date) values (#{title},#{uid},#{date})
+    </insert>
+
+    <delete id="deleteByTid" parameterType="integer">
+        delete from todo where tid = #{tid}
+    </delete>
+
+    <select id="findTodos" resultType="todo" parameterType="todo">
+        select * from todo
+        <where>
+            <if test="tid!=null">
+                and tid = #{tid}
+            </if>
+            <if test="date!=null">
+                and date = #{date}
+            </if>
+            <if test="uid!=null">
+                and uid = #{uid}
+            </if>
+            <if test="cid!=null">
+                and cid = #{cid}
+            </if>
+            <if test="is_done!=null">
+                and is_done = #{is_done}
+            </if>
+        </where>
+    </select>
+
+    <!--If the object is a Boolean, its value is extracted and returned;
+If the object is a Number, its double-precision floating-point value is compared with zero; non-zero is treated as true, zero as false;
+If the object is a Character, its boolean value is true if and only if its char value is non-zero;
+Otherwise, its boolean value is true if and only if it is non-null.-->
+    <update id="updateFinishStatus" parameterType="todo">
+        update todo set is_done = #{is_done} where tid = #{tid}
+    </update>
+
+    <update id="updateTodo" parameterType="todo">
+        update todo set title = #{title},detail = #{detail},date = #{date} where tid = #{tid}
+    </update>
+</mapper>

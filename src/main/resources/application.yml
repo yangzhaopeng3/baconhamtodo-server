@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/baconhamtodo?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 456456asd
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: com/mattyang/baconhamtodo/mapper/*.xml
+  type-aliases-package: com.mattyang.baconhamtodo.bean
+
+logging:
+  level:
+    com.mattyang.baconhamtodo.dao: DEBUG
