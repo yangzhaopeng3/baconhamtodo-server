@@ -52,4 +52,6 @@ public interface TodoDao {
      */
     void deleteByTid(Integer tid);
 
+    void deleteCategory(Integer cid);
+
 }

@@ -16,8 +16,17 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String nickname;
+    private String sessionId;
 
     public User() {
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public Integer getUid() {

@@ -7,6 +7,8 @@ import com.mattyang.baconhamtodo.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author 杨肇鹏
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
      * @return 返回0表示登录成功，返回1表示用户不存在，返回2表示密码错误
      */
     @Override
-    public ResMsg login(User user) {
+    public ResMsg login(User user, HttpServletRequest request) {
         ResMsg msg = new ResMsg();
         User user_byname = userDao.findUserByUsername(user.getUsername());
         if (user_byname == null) {
@@ -44,7 +46,11 @@ public class UserServiceImpl implements UserService {
             msg.setMsg("密码错误！");
             return msg;
         }
-        Integer uid = user_login.getUid();
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user_login);
+        String sessionId = session.getId();
+        //Integer uid = user_login.getUid();
+        user_login.setSessionId(sessionId);
         msg.setData(user_login);
         msg.setMsg("登录成功！");
         return msg;

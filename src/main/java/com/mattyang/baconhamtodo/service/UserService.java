@@ -3,6 +3,8 @@ package com.mattyang.baconhamtodo.service;
 import com.mattyang.baconhamtodo.bean.ResMsg;
 import com.mattyang.baconhamtodo.bean.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author 杨肇鹏
  * @version 1.0
@@ -26,5 +28,5 @@ public interface UserService {
      * @param user
      * @return
      */
-    ResMsg login(User user);
+    ResMsg login(User user, HttpServletRequest request);
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author 杨肇鹏
@@ -23,8 +24,9 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/login")
-    public ResMsg login(User user) {
-        return userService.login(user);
+    public ResMsg login(User user, HttpServletRequest request) {
+        //System.out.println(user);
+        return userService.login(user, request);
     }
 
     @RequestMapping("/register")

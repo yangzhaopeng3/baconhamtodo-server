@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mattyang.baconhamtodo.dao.CategoryDao">
+    <insert id="addCategory" parameterType="category">
+        <selectKey resultType="integer" order="AFTER" keyProperty="cid">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into category(uid, cname) values(#{uid},#{cname})
+    </insert>
+
+    <select id="findCategory" parameterType="integer" resultType="category">
+        select * from category where uid = #{uid}
+    </select>
+
+    <select id="findCategoryByCid" parameterType="integer" resultType="category">
+        select * from category where cid = #{cid}
+    </select>
+
+    <update id="updateCategory" parameterType="category">
+        update category set cname = #{cname} where cid = #{cid}
+    </update>
+
+    <delete id="deleteCategory" parameterType="integer">
+        delete from category where cid = #{cid}
+    </delete>
+</mapper>
